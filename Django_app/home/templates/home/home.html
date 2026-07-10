@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>✈️ AI Trip Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0f1724; --card: #16233a; --accent: #4fb8ff;
+    --accent-2: #7ee6c0; --text: #e8eefc; --muted: #9fb0c9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #e4eef8 0%, #e7e9ec 60%, #0d3b3e 100%);
+    color: var(--text); display: flex; justify-content: center; padding: 40px 16px;
+  }
+  .wrap { width: 100%; max-width: 780px; }
+  h1 { text-align: center; font-size: 2.1rem; margin-bottom: 4px; }
+  p.subtitle { text-align: center; color: var(--muted); margin-top: 0; margin-bottom: 28px; }
+  .card {
+    background: var(--card); border-radius: 14px; padding: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06);
+  }
+  textarea.trip-input {
+    width: 100%; background: #bacce9; color: var(--text);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+    padding: 14px; font-size: 1rem; resize: vertical;
+  }
+  textarea.trip-input:focus { outline: none; border-color: var(--accent); }
+  button.generate-btn {
+    margin-top: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #08131f; border: none; padding: 12px 22px; border-radius: 10px;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+  }
+  .answer-box {
+    margin-top: 28px; background: #267c96; border: 1px solid rgba(126,230,192,0.35);
+    border-radius: 12px; padding: 20px 24px; line-height: 1.55;
+  }
+  .answer-box h1, .answer-box h2, .answer-box h3 { color: var(--accent-2); }
+  .answer-box table { border-collapse: collapse; width: 100%; }
+  .answer-box th, .answer-box td { border: 1px solid rgba(255,255,255,0.15); padding: 6px 10px; }
+  .status { margin-top: 16px; font-weight: 600; color: var(--accent-2); }
+  .error-box {
+    margin-top: 20px; background: #3a1620; border: 1px solid #ff6b6b;
+    color: #ffb3b3; padding: 14px 18px; border-radius: 10px;
+  }
+  .download-link { display: inline-block; margin-top: 16px; color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>✈️ AI Trip Planner</h1>
+  <p class="subtitle">Ask a travel question, get a full plan back.</p>
+
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.question.label_tag }}
+      {{ form.question }}
+      <br>
+      <button type="submit" class="generate-btn">Generate Plan</button>
+    </form>
+
+    {% if error %}
+      <div class="error-box"><strong>Error:</strong> {{ error }}</div>
+    {% endif %}
+
+    {% if answer %}
+      <div class="status">✅ Done!</div>
+      <div class="answer-box">{{ answer_html|safe }}</div>
+      <a class="download-link" href="{% url 'home:download' %}">⬇ Download plan (.md)</a>
+    {% endif %}
+  </div>
+</div>
+</body>
+</html>
