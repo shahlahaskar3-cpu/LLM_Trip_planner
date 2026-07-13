@@ -7,7 +7,7 @@
 <style>
   :root {
     --bg: #0f1724; --card: #16233a; --accent: #4fb8ff;
-    --accent-2: #7ee6c0; --text: #e8eefc; --muted: #9fb0c9;
+    --accent-2: #7ee6c0; --text: #242d41; --text-on-dark: #e8eefc; --muted: #9fb0c9;
   }
   * { box-sizing: border-box; }
   body {
@@ -21,6 +21,7 @@
   .card {
     background: var(--card); border-radius: 14px; padding: 28px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-on-dark);
   }
   textarea.trip-input {
     width: 100%; background: #bacce9; color: var(--text);
@@ -36,6 +37,7 @@
   .answer-box {
     margin-top: 28px; background: #267c96; border: 1px solid rgba(126,230,192,0.35);
     border-radius: 12px; padding: 20px 24px; line-height: 1.55;
+    color: var(--text-on-dark);
   }
   .answer-box h1, .answer-box h2, .answer-box h3 { color: var(--accent-2); }
   .answer-box table { border-collapse: collapse; width: 100%; }

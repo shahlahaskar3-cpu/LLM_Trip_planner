@@ -1,0 +1,10 @@
+django
+langchain
+groq
+chromadb
+markdown
+langchain_groq
+langchain_openai
+langchain_tavily 
+langchain_google_community
+langchain-google-community[places]

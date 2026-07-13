@@ -11,7 +11,6 @@ from AI_Trip_Planner.utils.save_to_document import save_document
 
 from .forms import TripQueryForm
 
-
 def home(request):
     if request.method == "POST":
         form = TripQueryForm(request.POST)
