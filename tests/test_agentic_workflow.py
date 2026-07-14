@@ -3,6 +3,11 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
+# Direct top-level import (not through mock.patch's string-based resolver).
+# If this raises, pytest will show the REAL underlying ImportError traceback
+# during collection, instead of mock.patch's misleading generic AttributeError.
+from Django_app.AI_Trip_Planner.Agent import agentic_workflow  # noqa: F401
+
 
 def _build_graph_builder_with_mocked_deps():
     """
