@@ -1,5 +1,5 @@
-from AI_Trip_Planner.utils.model_loader import ModelLoader
-from AI_Trip_Planner.Prompt_library.prompt import SYSTEM_PROMPT
+from ..utils.model_loader import ModelLoader
+from ..Prompt_library.prompt import SYSTEM_PROMPT
 from langgraph.graph import StateGraph, MessagesState, END, START
 from langgraph.prebuilt import ToolNode, tools_condition
 from ..Tools.weather_search_tool import WeatherInfoTool
