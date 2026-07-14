@@ -9,4 +9,4 @@ langchain_tavily
 langchain_google_community
 langchain-google-community[places]
 pytest
-echo gunicorn 
+gunicorn 
