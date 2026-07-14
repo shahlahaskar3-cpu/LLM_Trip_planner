@@ -16,22 +16,14 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
-TRIP_PLANNER_DIR = BASE_DIR.parent / "AI_Trip_Planner"
+TRIP_PLANNER_DIR = BASE_DIR / "AI_Trip_Planner"
+
+# Make Agent/, Tools/, utils/ importable directly
 sys.path.insert(0, str(TRIP_PLANNER_DIR))
-
-# Add the AI_Trip_Planner folder (parent of Django_app) to sys.path
-# so Agent/ and utils/ can be imported directly.
-sys.path.insert(0, str(BASE_DIR.parent))
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-sys.path.insert(0, str(BASE_DIR.parent / "AI_Trip_Planner"))
-
 
 load_dotenv(TRIP_PLANNER_DIR / ".env")
-sys.path.insert(0, str(TRIP_PLANNER_DIR))
-os.chdir(TRIP_PLANNER_DIR)
-sys.path.insert(0, str(TRIP_PLANNER_DIR))
-os.chdir(TRIP_PLANNER_DIR)
+
+
 
 
 print("GROQ KEY LOADED:", bool(os.environ.get("GROQ_API_KEY")))

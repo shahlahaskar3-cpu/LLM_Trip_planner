@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      # Dummy values only. Nothing in this test suite makes real API calls -
+      # GraphBuilder is mocked in the Django tests, and the pytest suite only
+      # exercises pure-logic tools (Calculator, config loader) plus
+      # CurrencyConverter with requests.get mocked out. These exist only so
+      # module-level `os.getenv(...)` calls and `print("GROQ KEY LOADED", ...)`
+      # don't error out or print misleading "False" during CI.
+      
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      SECRET_KEY: dummy-ci-secret-key
+      EXCHANGE_RATE_API_KEY: ${{ secrets.EXCHANGE_RATE_API_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run AI_Trip_Planner unit tests (tools & utils)
+        run: pytest tests/ -v
+
+      - name: Run Django test suite
+        working-directory: Django_app
+        run: python manage.py test home -v 2
