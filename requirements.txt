@@ -10,4 +10,4 @@ langchain_google_community
 langchain-google-community[places]
 pytest
 gunicorn
-test
+PyYAML==6.0.3
