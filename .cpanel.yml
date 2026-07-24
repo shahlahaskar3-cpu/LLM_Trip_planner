@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/medfolks/AI_Trip_Planner/
+    - /bin/cp -R * $DEPLOYPATH
+    - source /home/medfolks/virtualenv/AI_Trip_Planner/3.12/bin/activate && pip install -r $DEPLOYPATH/requirements.txt
+    - source /home/medfolks/virtualenv/AI_Trip_Planner/3.12/bin/activate && cd $DEPLOYPATH/Django_app && python manage.py migrate --noinput
+    - mkdir -p $DEPLOYPATH/tmp
+    - touch $DEPLOYPATH/tmp/restart.txt
