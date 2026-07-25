@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-$yfy@pp2p4ffmq2-$r5fl3!ns1^1)lmd$n$-+v)bwl!281fw22
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "tripplanner.medfolks.ai", "medfolks.ai"]
 render_external_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if render_external_hostname:
     ALLOWED_HOSTS.append(render_external_hostname)
